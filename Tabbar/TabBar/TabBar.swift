@@ -17,6 +17,21 @@ class TabBar: UITabBar {
     weak var customDelegate: TabBarDelegate?
     var containers = [TabBarButton]()
     var barHeight: CGFloat = 54
+   
+    private lazy var borderLayer: CAShapeLayer = {
+        let borderLayer = CAShapeLayer()
+        borderLayer.fillColor = UIColor.clear.cgColor
+        borderLayer.strokeColor = UIColor.init(red: 239/255.0, green: 241/255.0, blue: 244/255.0, alpha: 1).cgColor
+        borderLayer.position = .zero
+        borderLayer.anchorPoint = .zero
+        borderLayer.lineJoin = .round
+        
+        borderLayer.shadowColor = UIColor.init(red: 239/255.0, green: 241/255.0, blue: 244/255.0, alpha: 1).cgColor
+        borderLayer.shadowOffset = CGSize(width: 0, height: -1)
+        borderLayer.shadowRadius = 1
+        borderLayer.shadowOpacity = 1
+        return borderLayer
+    }()
     
     override var selectedItem: UITabBarItem? {
         willSet {
@@ -132,6 +147,7 @@ extension TabBar {
             lastX = button.frame.maxX
             button.setNeedsLayout()
         }
+        addshadowPath()
     }
     
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -143,3 +159,35 @@ extension TabBar {
         return sizeThatFits
     }
 }
+
+extension TabBar {
+    
+    private func addshadowPath() {
+        borderLayer.bounds = bounds
+
+        let pitWidth: CGFloat = 37
+        let topY: CGFloat = -7
+        let startPointX = CGFloat((bounds.width - pitWidth) * 0.5)
+        let endPoint = CGPoint(x: startPointX + pitWidth, y: 0)
+        let pitCenterTopPoint = CGPoint(x: startPointX + (pitWidth / 2), y: topY)
+        
+        let leftBottomP = CGPoint(x: startPointX + abs(topY / 2), y: 0)
+        let leftTopP = CGPoint(x: pitCenterTopPoint.x - abs(10), y: topY)
+        let rightBottomP = CGPoint(x: endPoint.x - abs(topY / 2), y: 0)
+        let rightTopP = CGPoint(x: pitCenterTopPoint.x + abs(10), y: topY)
+        
+        let borderPath = CGMutablePath()
+        borderPath.move(to: .zero)
+        borderPath.addArc(center: CGPoint(x: 15, y: 15), radius: 15, startAngle: .pi, endAngle: -.pi / 2, clockwise: false)
+        borderPath.addLine(to: CGPoint(x: startPointX, y: 0))
+        borderPath.addCurve(to: pitCenterTopPoint, control1: leftBottomP, control2: leftTopP)
+        borderPath.addCurve(to: endPoint, control1: rightTopP, control2: rightBottomP)
+        borderPath.addLine(to: CGPoint(x: bounds.width, y: 0))
+        borderPath.addArc(center: CGPoint(x: bounds.width - 15, y: 15), radius: 15, startAngle: -.pi / 2, endAngle: 0, clockwise: false)
+        
+        borderLayer.path = borderPath
+        
+    }
+    
+}
+

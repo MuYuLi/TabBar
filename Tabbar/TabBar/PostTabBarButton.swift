@@ -51,7 +51,7 @@ class PostTabBarButton: UIView {
             make.centerX.top.equalToSuperview()
         }
         titleLabel.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-8)
+            make.bottom.equalToSuperview().offset(-3)
             make.centerX.equalToSuperview()
         }
     }

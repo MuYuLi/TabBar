@@ -180,7 +180,7 @@ extension TabBarButton {
             
             titleLabel.sizeToFit()
             titleLabel.snp.makeConstraints { (make) in
-                make.bottom.equalToSuperview().offset(-8)
+                make.bottom.equalToSuperview().offset(-3)
                 make.centerX.equalToSuperview()
             }
             imageView.sizeToFit()
@@ -191,8 +191,7 @@ extension TabBarButton {
             
             let dotW: CGFloat = dotView.frame.width
             dotView.snp.makeConstraints { (make) in
-                make.centerX.equalTo(imageView.snp.right)
-                make.centerY.equalTo(imageView.snp.top)
+                make.top.right.equalTo(imageView)
                 make.size.equalTo(CGSize(width: dotW, height: dotW))
             }
             
@@ -202,10 +201,9 @@ extension TabBarButton {
             
             let textSize = badgeLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
             let containarWidth = max(textSize.width + badgeMargin * 2, badgeHeight)
-            
             badgeContainer.snp.remakeConstraints { (make) in
-                make.top.equalTo(badgeMargin)
-                make.left.equalTo(imageView.snp.right).offset(-badgeMargin)
+                make.top.equalTo(imageView)
+                make.left.equalTo(imageView).offset(23)
                 make.width.equalTo(containarWidth)
                 make.height.equalTo(badgeHeight)
             }

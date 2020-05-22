@@ -11,6 +11,14 @@ import Rswift
 
 class TabBarController: UITabBarController {
     
+    
+    let customViewInsets: UIEdgeInsets = .init(top: -7, left: 0, bottom: 0, right: 0)
+    var totalCustomBarHeight: CGFloat {
+        get {
+            return ((tabBar as? TabBar)?.barHeight ?? tabBar.frame.height) + customViewInsets.top
+        }
+    }
+    
     private(set) lazy var homeVC: ExampleViewController = {
         let vc = ExampleViewController(style: .home)
         vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_ic_home(),
@@ -32,8 +40,7 @@ class TabBarController: UITabBarController {
         let postView = PostTabBarButton(image: R.image.ic_tab_add_post(), title: "发布")
         postView.isUserInteractionEnabled = false
         vc.tabBarItem = TabBarItem(style: .customeView(.init(view: postView,
-                                                             insets: .init(top: -7, left: 0, bottom: 0, right: 0))))
-        
+                                                             insets: customViewInsets)))
         return vc
     }()
     
