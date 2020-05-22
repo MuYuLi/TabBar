@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "tab_ic_homes.png",
+      "filename" : "tab_communitys.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tab_ic_homes@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tab_ic_homes@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

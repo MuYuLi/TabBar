@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "tab_ic_home.png",
+      "filename" : "tab_mes.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tab_ic_home@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "tab_ic_home@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

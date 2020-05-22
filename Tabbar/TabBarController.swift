@@ -21,17 +21,17 @@ class TabBarController: UITabBarController {
     
     private(set) lazy var homeVC: ExampleViewController = {
         let vc = ExampleViewController(style: .home)
-        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_ic_home(),
-                                                       selectedImage: R.image.tab_ic_homes(),
+        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_home(),
+                                                       selectedImage: R.image.tab_homes(),
                                                        title: "首页")))
         return vc
     }()
     
     private(set) lazy var forumVC: ExampleViewController = {
         let vc = ExampleViewController(style: .activity)
-        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_ic_dynamic(),
-                                                       selectedImage: R.image.tab_ic_dynamics(),
-                                                       title: "动态")))
+        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_find(),
+                                                       selectedImage: R.image.tab_finds(),
+                                                       title: "发现")))
         return vc
     }()
     
@@ -46,8 +46,8 @@ class TabBarController: UITabBarController {
     
     private(set) lazy var messageVC: ExampleViewController = {
         let vc = ExampleViewController(style: .message)
-        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_ic_information(),
-                                                       selectedImage: R.image.tab_ic_informations(),
+        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_community(),
+                                                       selectedImage: R.image.tab_communitys(),
                                                        title: "消息")))
         return vc
     }()
@@ -90,7 +90,10 @@ extension TabBarController {
     }
     
     private func postButtonPressed() {
-        print("add post action")
+        
+        let alert = UIAlertController(title: "内容", message: "请选择发帖形式", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

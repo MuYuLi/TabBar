@@ -120,22 +120,22 @@ struct R: Rswift.Validatable {
     static let background_dark = Rswift.ImageResource(bundle: R.hostingBundle, name: "background_dark")
     /// Image `ic_tab_add_post`.
     static let ic_tab_add_post = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic_tab_add_post")
-    /// Image `tab_ic_dynamic`.
-    static let tab_ic_dynamic = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_dynamic")
-    /// Image `tab_ic_dynamics`.
-    static let tab_ic_dynamics = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_dynamics")
-    /// Image `tab_ic_home`.
-    static let tab_ic_home = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_home")
-    /// Image `tab_ic_homes`.
-    static let tab_ic_homes = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_homes")
-    /// Image `tab_ic_information`.
-    static let tab_ic_information = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_information")
-    /// Image `tab_ic_informations`.
-    static let tab_ic_informations = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_informations")
-    /// Image `tab_ic_me`.
-    static let tab_ic_me = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_me")
-    /// Image `tab_ic_mes`.
-    static let tab_ic_mes = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_ic_mes")
+    /// Image `tab_community`.
+    static let tab_community = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_community")
+    /// Image `tab_communitys`.
+    static let tab_communitys = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_communitys")
+    /// Image `tab_find`.
+    static let tab_find = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_find")
+    /// Image `tab_finds`.
+    static let tab_finds = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_finds")
+    /// Image `tab_home`.
+    static let tab_home = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_home")
+    /// Image `tab_homes`.
+    static let tab_homes = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_homes")
+    /// Image `tab_me`.
+    static let tab_me = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_me")
+    /// Image `tab_mes`.
+    static let tab_mes = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_mes")
     /// Image `transparent`.
     static let transparent = Rswift.ImageResource(bundle: R.hostingBundle, name: "transparent")
 
@@ -154,58 +154,58 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_dynamic", bundle: ..., traitCollection: ...)`
-    static func tab_ic_dynamic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_dynamic, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_community", bundle: ..., traitCollection: ...)`
+    static func tab_community(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_community, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_dynamics", bundle: ..., traitCollection: ...)`
-    static func tab_ic_dynamics(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_dynamics, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_communitys", bundle: ..., traitCollection: ...)`
+    static func tab_communitys(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_communitys, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_home", bundle: ..., traitCollection: ...)`
-    static func tab_ic_home(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_home, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_find", bundle: ..., traitCollection: ...)`
+    static func tab_find(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_find, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_homes", bundle: ..., traitCollection: ...)`
-    static func tab_ic_homes(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_homes, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_finds", bundle: ..., traitCollection: ...)`
+    static func tab_finds(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_finds, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_information", bundle: ..., traitCollection: ...)`
-    static func tab_ic_information(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_information, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_home", bundle: ..., traitCollection: ...)`
+    static func tab_home(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_home, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_informations", bundle: ..., traitCollection: ...)`
-    static func tab_ic_informations(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_informations, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_homes", bundle: ..., traitCollection: ...)`
+    static func tab_homes(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_homes, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_me", bundle: ..., traitCollection: ...)`
-    static func tab_ic_me(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_me, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_me", bundle: ..., traitCollection: ...)`
+    static func tab_me(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_me, compatibleWith: traitCollection)
     }
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "tab_ic_mes", bundle: ..., traitCollection: ...)`
-    static func tab_ic_mes(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.tab_ic_mes, compatibleWith: traitCollection)
+    /// `UIImage(named: "tab_mes", bundle: ..., traitCollection: ...)`
+    static func tab_mes(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_mes, compatibleWith: traitCollection)
     }
     #endif
 
@@ -268,7 +268,7 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = ViewController
+      typealias InitialController = UIKit.UINavigationController
 
       let bundle = R.hostingBundle
       let name = "Main"

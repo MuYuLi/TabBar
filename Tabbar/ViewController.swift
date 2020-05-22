@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     
     @objc func action1() {
         let rootTabBarController = TabBarController()
-        self.present(rootTabBarController, animated: true, completion: nil)
+        navigationController?.pushViewController(rootTabBarController, animated: true)
     }
     
     func systemStyle() -> UITabBarController {
@@ -45,11 +45,11 @@ class ViewController: UIViewController {
         let v4 = ExampleViewController(style: .message)
         let v5 = ExampleViewController(style: .me)
         
-        v1.tabBarItem = UITabBarItem.init(title: "Home", image: R.image.tab_ic_home(), selectedImage: R.image.tab_ic_homes())
-        v2.tabBarItem = UITabBarItem.init(title: "Find", image: R.image.tab_ic_dynamic(), selectedImage: R.image.tab_ic_dynamics())
+        v1.tabBarItem = UITabBarItem.init(title: "Home", image: R.image.tab_home(), selectedImage: R.image.tab_homes())
+        v2.tabBarItem = UITabBarItem.init(title: "Find", image: R.image.tab_find(), selectedImage: R.image.tab_finds())
         v3.tabBarItem = UITabBarItem.init(title: "Photo", image: UIImage(named: "ic_tab_add_post"), selectedImage: UIImage(named: "ic_tab_add_post"))
-        v4.tabBarItem = UITabBarItem.init(title: "Favor", image: R.image.tab_ic_information(), selectedImage: R.image.tab_ic_informations())
-        v5.tabBarItem = UITabBarItem.init(title: "Me", image: R.image.tab_ic_me(), selectedImage: R.image.tab_ic_mes())
+        v4.tabBarItem = UITabBarItem.init(title: "Favor", image: R.image.tab_community(), selectedImage: R.image.tab_communitys())
+        v5.tabBarItem = UITabBarItem.init(title: "Me", image: R.image.tab_me(), selectedImage: R.image.tab_mes())
         
         tabBarController.tabBar.shadowImage = nil
         

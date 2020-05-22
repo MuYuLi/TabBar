@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		ADDB56FAEEAFE5B0D33FC33C /* libPods-Tabbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C0DB253F65AD35CC510855C1 /* libPods-Tabbar.a */; };
+		B70B52312477BAF6003FD7BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70B52302477BAF6003FD7BF /* R.generated.swift */; };
 		B72433FC2462DD24007D693F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72433FB2462DD24007D693F /* TabBarController.swift */; };
 		B76381AF24667E98002937CD /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76381AB24667E97002937CD /* TabBarItem.swift */; };
 		B76381B024667E98002937CD /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76381AC24667E97002937CD /* TabBar.swift */; };
 		B76381B124667E98002937CD /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76381AD24667E98002937CD /* TabBarButton.swift */; };
 		B76381B224667E98002937CD /* PostTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76381AE24667E98002937CD /* PostTabBarButton.swift */; };
-		B76381B52466AD26002937CD /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76381B42466AD26002937CD /* R.generated.swift */; };
 		B772C2B5244FE19A00A62C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B772C2B4244FE19A00A62C6C /* AppDelegate.swift */; };
 		B772C2B9244FE19A00A62C6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B772C2B8244FE19A00A62C6C /* ViewController.swift */; };
 		B772C2BC244FE19A00A62C6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B772C2BA244FE19A00A62C6C /* Main.storyboard */; };
@@ -43,12 +43,12 @@
 
 /* Begin PBXFileReference section */
 		3C33BBC8127B8648D97BE59E /* Pods-Tabbar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tabbar.release.xcconfig"; path = "Target Support Files/Pods-Tabbar/Pods-Tabbar.release.xcconfig"; sourceTree = "<group>"; };
+		B70B52302477BAF6003FD7BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		B72433FB2462DD24007D693F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B76381AB24667E97002937CD /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		B76381AC24667E97002937CD /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		B76381AD24667E98002937CD /* TabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
 		B76381AE24667E98002937CD /* PostTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTabBarButton.swift; sourceTree = "<group>"; };
-		B76381B42466AD26002937CD /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = R.generated.swift; path = Tabbar/Resource/R.generated.swift; sourceTree = SOURCE_ROOT; };
 		B772C2B1244FE19A00A62C6C /* Tabbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tabbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B772C2B4244FE19A00A62C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B772C2B8244FE19A00A62C6C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,7 +104,6 @@
 		B76381B62466AD2F002937CD /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				B76381B42466AD26002937CD /* R.generated.swift */,
 				B772C2C2244FE19C00A62C6C /* Info.plist */,
 				B772C2BD244FE19C00A62C6C /* Assets.xcassets */,
 				B772C2BF244FE19C00A62C6C /* LaunchScreen.storyboard */,
@@ -138,6 +137,7 @@
 		B772C2B3244FE19A00A62C6C /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				B70B52302477BAF6003FD7BF /* R.generated.swift */,
 				B772C2EE24518CF900A62C6C /* TabBar */,
 				B772C2B4244FE19A00A62C6C /* AppDelegate.swift */,
 				B72433FB2462DD24007D693F /* TabBarController.swift */,
@@ -366,7 +366,7 @@
 			files = (
 				B76381B124667E98002937CD /* TabBarButton.swift in Sources */,
 				B772C2B9244FE19A00A62C6C /* ViewController.swift in Sources */,
-				B76381B52466AD26002937CD /* R.generated.swift in Sources */,
+				B70B52312477BAF6003FD7BF /* R.generated.swift in Sources */,
 				B76381AF24667E98002937CD /* TabBarItem.swift in Sources */,
 				B772C2B5244FE19A00A62C6C /* AppDelegate.swift in Sources */,
 				B772C2F424527DE900A62C6C /* ExampleViewController.swift in Sources */,
