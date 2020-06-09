@@ -19,6 +19,9 @@ class TabBarItem: UITabBarItem {
         
         /// 自定义view
         case customeView(CustomView)
+       
+        /// 本地gif
+        case localGIF(LocalGIF)
         
         struct LocalImage {
             var image: UIImage?
@@ -35,6 +38,11 @@ class TabBarItem: UITabBarItem {
         struct CustomView {
             var view : UIView
             var insets = UIEdgeInsets.zero
+        }
+        struct LocalGIF {
+            var normalImageName: String
+            var selectedGIFName: String
+            var title: String
         }
     }
     

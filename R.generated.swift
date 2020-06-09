@@ -114,7 +114,21 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.image` struct is generated, and contains static references to 11 images.
+  /// This `R.file` struct is generated, and contains static references to 1 files.
+  struct file {
+    /// Resource file `tab_mes.gif`.
+    static let tab_mesGif = Rswift.FileResource(bundle: R.hostingBundle, name: "tab_mes", pathExtension: "gif")
+
+    /// `bundle.url(forResource: "tab_mes", withExtension: "gif")`
+    static func tab_mesGif(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.tab_mesGif
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.image` struct is generated, and contains static references to 12 images.
   struct image {
     /// Image `background_dark`.
     static let background_dark = Rswift.ImageResource(bundle: R.hostingBundle, name: "background_dark")
@@ -134,6 +148,8 @@ struct R: Rswift.Validatable {
     static let tab_homes = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_homes")
     /// Image `tab_me`.
     static let tab_me = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_me")
+    /// Image `tab_mes.gif`.
+    static let tab_mesGif = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_mes.gif")
     /// Image `tab_mes`.
     static let tab_mes = Rswift.ImageResource(bundle: R.hostingBundle, name: "tab_mes")
     /// Image `transparent`.
@@ -206,6 +222,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "tab_mes", bundle: ..., traitCollection: ...)`
     static func tab_mes(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.tab_mes, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "tab_mes.gif", bundle: ..., traitCollection: ...)`
+    static func tab_mesGif(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.tab_mesGif, compatibleWith: traitCollection)
     }
     #endif
 

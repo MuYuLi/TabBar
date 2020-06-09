@@ -21,6 +21,12 @@ class TabBarButton: UIControl {
         return imageView
     }()
     
+    private(set) var animatedImage: AnimatedImageView = {
+        let imageView = AnimatedImageView()
+        imageView.repeatCount = .once
+        return imageView
+    }()
+    
     private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel(frame: CGRect.zero)
         titleLabel.backgroundColor = .clear
@@ -101,17 +107,18 @@ class TabBarButton: UIControl {
         let _ = _item.rx.observe(String.self, "badgeValue")
             .subscribe(onNext: {[weak self] value in
                 guard let self = self else { return }
-                self.updateDisplay()
+                self.updateBadgeValue()
             })
             .disposed(by: disposeBag)
         
         let _ = _item.rx.observe(Bool.self, "dotViewHidden")
             .subscribe(onNext: {[weak self] hidden in
                 guard let self = self else { return }
-                self.updateDisplay()
+                self.updateDotViewHidden()
             })
             .disposed(by: disposeBag)
     }
+    
     
     private func setupViews() {
         backgroundColor = UIColor(red: 248/255.0, green: 248/255.0, blue: 248/255.0, alpha: 1)
@@ -119,11 +126,19 @@ class TabBarButton: UIControl {
         case .customeView(let v):
             addSubview(v.view)
         case .local, .network:
-            addSubview(titleLabel)
             addSubview(imageView)
+            addSubview(titleLabel)
             addSubview(dotView)
-            badgeContainer.addSubview(badgeLabel)
             addSubview(badgeContainer)
+            badgeContainer.addSubview(badgeLabel)
+        case .localGIF:
+            addSubview(animatedImage)
+            animatedImage.delegate = self
+            addSubview(titleLabel)
+            addSubview(dotView)
+            addSubview(badgeContainer)
+            badgeContainer.addSubview(badgeLabel)
+    
         }
     }
     
@@ -140,32 +155,43 @@ extension TabBarButton {
         case .local(let v):
             imageView.image = isSelected ? v.selectedImage : v.image
             
-            titleLabel.font = isSelected ? .systemFont(ofSize: 10, weight: .bold) : .systemFont(ofSize: 10, weight: .regular)
             titleLabel.text = v.title
+            titleLabel.font = isSelected ? .systemFont(ofSize: 10, weight: .bold) : .systemFont(ofSize: 10, weight: .regular)
             titleLabel.sizeToFit()
-            
-            badgeLabel.text = _item.badgeValue
-            badgeContainer.isHidden = _item.badgeValue == nil
-            badgeLabel.isHidden = _item.badgeValue == nil
-            
-            dotView.isHidden = _item.dotViewHidden
         case .network(let v):
             let imageUrl = isSelected ? v.selectedImageUrl : v.imageUrl
             imageView.kf.setImage(with: imageUrl)
-            titleLabel.font = isSelected ? .systemFont(ofSize: 10, weight: .bold) : .systemFont(ofSize: 10, weight: .regular)
+            
             titleLabel.text = v.title
+            titleLabel.font = isSelected ? .systemFont(ofSize: 10, weight: .bold) : .systemFont(ofSize: 10, weight: .regular)
             titleLabel.sizeToFit()
-            
-            badgeLabel.text = _item.badgeValue
-            badgeContainer.isHidden = _item.badgeValue == nil
-            badgeLabel.isHidden = _item.badgeValue == nil
-            
-            
-            dotView.isHidden = _item.dotViewHidden
+        case .localGIF(let v):
+            if isSelected {
+                guard let path = Bundle.main.path(forResource:v.selectedGIFName, ofType:"gif") else { return }
+                let provider = LocalFileImageDataProvider(fileURL: .init(fileURLWithPath: path))
+                animatedImage.kf.setImage(with: provider)
+            } else {
+                let imageName = v.normalImageName
+                animatedImage.image = UIImage.init(named: imageName)
+            }
+            titleLabel.text = v.title
+            titleLabel.font = isSelected ? .systemFont(ofSize: 10, weight: .bold) : .systemFont(ofSize: 10, weight: .regular)
+            titleLabel.sizeToFit()
         case .customeView(_):
             break
         }
         setNeedsLayout()
+    }
+    
+    private func updateBadgeValue() {
+        badgeLabel.text = _item.badgeValue
+        badgeContainer.isHidden = _item.badgeValue == nil
+        badgeLabel.isHidden = _item.badgeValue == nil
+        setNeedsLayout()
+    }
+    
+    private func updateDotViewHidden() {
+        dotView.isHidden = _item.dotViewHidden
     }
     
     override func layoutSubviews() {
@@ -177,42 +203,65 @@ extension TabBarButton {
                 make.edges.equalToSuperview().inset(v.insets)
             }
         case .local, .network:
-            
-            titleLabel.sizeToFit()
-            titleLabel.snp.makeConstraints { (make) in
-                make.bottom.equalToSuperview().offset(-3)
-                make.centerX.equalToSuperview()
-            }
             imageView.sizeToFit()
             imageView.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview()
                 make.centerY.equalToSuperview().offset(-7)
             }
-            
-            let dotW: CGFloat = dotView.frame.width
-            dotView.snp.makeConstraints { (make) in
-                make.top.right.equalTo(imageView)
-                make.size.equalTo(CGSize(width: dotW, height: dotW))
+            layoutCommonUI(imageView: imageView)
+        case .localGIF:
+            animatedImage.snp.makeConstraints { (make) in
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview().offset(-7)
+                make.size.equalTo(CGSize(width: 30, height: 30))
             }
-            
-            let badgeMargin: CGFloat = 2
-            let badgeHeight: CGFloat = 14
-            badgeLabel.sizeToFit()
-            
-            let textSize = badgeLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-            let containarWidth = max(textSize.width + badgeMargin * 2, badgeHeight)
-            badgeContainer.snp.remakeConstraints { (make) in
-                make.top.equalTo(imageView)
-                make.left.equalTo(imageView).offset(23)
-                make.width.equalTo(containarWidth)
-                make.height.equalTo(badgeHeight)
-            }
-            badgeLabel.snp.makeConstraints { (make) in
-                make.center.equalToSuperview()
-            }
-            badgeContainer.layer.cornerRadius = badgeHeight / 2.0
-            
+            layoutCommonUI(imageView: animatedImage)
         }
+        
     }
+    
+    private func layoutCommonUI(imageView: UIImageView) {
+        titleLabel.sizeToFit()
+        titleLabel.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-3)
+            make.centerX.equalToSuperview()
+        }
+        let dotW: CGFloat = dotView.frame.width
+        dotView.snp.makeConstraints { (make) in
+            make.top.right.equalTo(imageView)
+            make.size.equalTo(CGSize(width: dotW, height: dotW))
+        }
+        
+        let badgeMargin: CGFloat = 2
+        let badgeHeight: CGFloat = 14
+        badgeLabel.sizeToFit()
+        
+        let textSize = badgeLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+        let containarWidth = max(textSize.width + badgeMargin * 2, badgeHeight)
+        badgeContainer.snp.remakeConstraints { (make) in
+            make.top.equalTo(imageView)
+            make.left.equalTo(imageView).offset(23)
+            make.width.equalTo(containarWidth)
+            make.height.equalTo(badgeHeight)
+        }
+        badgeLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        badgeContainer.layer.cornerRadius = badgeHeight / 2.0
+    }
+    
 }
 
+extension TabBarButton: AnimatedImageViewDelegate {
+    
+    func animatedImageViewDidFinishAnimating(_ imageView: Kingfisher.AnimatedImageView) {
+        switch _item.style {
+        case .localGIF(let v):
+            let imageName = isSelected ? v.selectedGIFName : v.normalImageName
+            animatedImage.image = UIImage.init(named: imageName)
+        default: break
+        }
+        
+    }
+    
+}

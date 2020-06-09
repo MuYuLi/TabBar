@@ -54,7 +54,9 @@ class TabBarController: UITabBarController {
     
     private(set) lazy var meVC: ExampleViewController = {
         let vc = ExampleViewController(style: .me)
-        vc.tabBarItem = TabBarItem(style:.network(.init(imageUrl: URL(string: "http://q9w3myarv.bkt.clouddn.com/loading%281%29.gif"), selectedImageUrl: URL(string: "http://q9w3myarv.bkt.clouddn.com/loading%281%29.gif"), title: "我的")))
+        vc.tabBarItem = TabBarItem(style:.localGIF(.init(normalImageName: "tab_me",
+                                                         selectedGIFName: "tab_mes",
+                                                         title: "我的")))
         return vc
     }()
     
