@@ -21,17 +21,25 @@ class TabBarController: UITabBarController {
     
     private(set) lazy var homeVC: ExampleViewController = {
         let vc = ExampleViewController(style: .home)
-        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_home(),
-                                                       selectedImage: R.image.tab_homes(),
-                                                       title: "首页")))
+        vc.tabBarItem = TabBarItem(
+            style: .local(.init(
+                image: R.image.tab_home(),
+                selectedImage: R.image.tab_homes(),
+                title: "首页"
+                ))
+        )
         return vc
     }()
     
     private(set) lazy var forumVC: ExampleViewController = {
         let vc = ExampleViewController(style: .activity)
-        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_find(),
-                                                       selectedImage: R.image.tab_finds(),
-                                                       title: "发现")))
+        vc.tabBarItem = TabBarItem(
+            style: .local(.init(
+                image: R.image.tab_find(),
+                selectedImage: R.image.tab_finds(),
+                title: "发现"
+                ))
+        )
         return vc
     }()
     
@@ -39,24 +47,35 @@ class TabBarController: UITabBarController {
         let vc = ExampleViewController(style: .add)
         let postView = PostTabBarButton(image: R.image.ic_tab_add_post(), title: "发布")
         postView.isUserInteractionEnabled = false
-        vc.tabBarItem = TabBarItem(style: .customeView(.init(view: postView,
-                                                             insets: customViewInsets)))
+        vc.tabBarItem = TabBarItem(
+            style: .customeView(.init(
+                view: postView,
+                insets: customViewInsets
+                ))
+        )
         return vc
     }()
     
     private(set) lazy var messageVC: ExampleViewController = {
         let vc = ExampleViewController(style: .message)
-        vc.tabBarItem = TabBarItem(style: .local(.init(image: R.image.tab_community(),
-                                                       selectedImage: R.image.tab_communitys(),
-                                                       title: "消息")))
+        vc.tabBarItem = TabBarItem(
+            style: .local(.init(
+                image: R.image.tab_community(),
+                selectedImage: R.image.tab_communitys(),
+                title: "消息"
+                ))
+        )
         return vc
     }()
     
     private(set) lazy var meVC: ExampleViewController = {
         let vc = ExampleViewController(style: .me)
-        vc.tabBarItem = TabBarItem(style:.localGIF(.init(normalImageName: "tab_me",
-                                                         selectedGIFName: "tab_mes",
-                                                         title: "我的")))
+        vc.tabBarItem = TabBarItem(
+            style:.localGIF(.init(normalImageName: "tab_me",
+                                  selectedGIFName: "tab_mes",
+                                  title: "我的"
+                ))
+        )
         return vc
     }()
     
@@ -137,26 +156,6 @@ extension TabBarController: TabBarDelegate {
             delegate?.tabBarController?(self, didSelect: controller)
         }
     }
-    
-    override var selectedIndex: Int {
-        willSet {
-            guard let tabBar = tabBar as? TabBar else {
-                return
-            }
-            tabBar.select(itemAt: selectedIndex, animated: false)
-        }
-    }
-    
-    override var selectedViewController: UIViewController? {
-        willSet {
-            guard let newValue = newValue else { return }
-            guard let tabBar = tabBar as? TabBar, let index = viewControllers?.firstIndex(of: newValue) else {
-                return
-            }
-            tabBar.select(itemAt: index, animated: false)
-        }
-    }
-    
 }
 
 extension TabBarController {
