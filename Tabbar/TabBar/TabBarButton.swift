@@ -36,19 +36,10 @@ class TabBarButton: UIControl {
         return titleLabel
     }()
     
-    private(set) var badgeContainer: UIView = {
-        let badgeContainer = UIView()
-        badgeContainer.isHidden = true
-        badgeContainer.backgroundColor = UIColor(red: 249/255.0, green: 97/255.0, blue: 73/255.0, alpha: 1)
-        return badgeContainer
-    }()
-    
-    private(set) var badgeLabel: UILabel = {
-        let badgeLabel = UILabel()
-        badgeLabel.font = .systemFont(ofSize: 10)
-        badgeLabel.textColor = .white
-        badgeLabel.textAlignment = .center
-        return badgeLabel
+    private(set) var badgeView: TabBadgeView = {
+        let badgeView = TabBadgeView()
+        badgeView.isHidden = true
+        return badgeView
     }()
     
     private(set) var dotView: UIView = {
@@ -129,15 +120,14 @@ class TabBarButton: UIControl {
             addSubview(imageView)
             addSubview(titleLabel)
             addSubview(dotView)
-            addSubview(badgeContainer)
-            badgeContainer.addSubview(badgeLabel)
+            addSubview(badgeView)
+      
         case .localGIF:
             addSubview(animatedImage)
             animatedImage.delegate = self
             addSubview(titleLabel)
             addSubview(dotView)
-            addSubview(badgeContainer)
-            badgeContainer.addSubview(badgeLabel)
+            addSubview(badgeView)
     
         }
     }
@@ -184,9 +174,8 @@ extension TabBarButton {
     }
     
     private func updateBadgeValue() {
-        badgeLabel.text = _item.badgeValue
-        badgeContainer.isHidden = _item.badgeValue == nil
-        badgeLabel.isHidden = _item.badgeValue == nil
+        badgeView.badgeLabel.text = _item.badgeValue
+        badgeView.isHidden = _item.badgeValue == nil
         setNeedsLayout()
     }
     
@@ -231,23 +220,10 @@ extension TabBarButton {
             make.top.right.equalTo(imageView)
             make.size.equalTo(CGSize(width: dotW, height: dotW))
         }
-        
-        let badgeMargin: CGFloat = 2
-        let badgeHeight: CGFloat = 14
-        badgeLabel.sizeToFit()
-        
-        let textSize = badgeLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-        let containarWidth = max(textSize.width + badgeMargin * 2, badgeHeight)
-        badgeContainer.snp.remakeConstraints { (make) in
+        badgeView.snp.remakeConstraints { (make) in
             make.top.equalTo(imageView)
             make.left.equalTo(imageView).offset(23)
-            make.width.equalTo(containarWidth)
-            make.height.equalTo(badgeHeight)
         }
-        badgeLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
-        badgeContainer.layer.cornerRadius = badgeHeight / 2.0
     }
     
 }
@@ -264,4 +240,61 @@ extension TabBarButton: AnimatedImageViewDelegate {
         
     }
     
+}
+
+extension TabBarButton {
+
+    class TabBadgeView: UIView {
+
+        private(set) lazy var contentView: UIView = {
+            let view = UIView()
+            view.layer.masksToBounds = true
+            view.backgroundColor = .red
+            return view
+        }()
+
+        private(set) lazy var badgeLabel: UILabel = {
+            let view = UILabel()
+            view.textAlignment = .center
+            view.textColor = .white
+            view.font = .systemFont(ofSize: 10)
+            return view
+        }()
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+
+            setupViews()
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        private func setupViews() {
+            backgroundColor = .white
+            addSubview(contentView)
+            contentView.addSubview(badgeLabel)
+
+            contentView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview().inset(1)
+                make.width.greaterThanOrEqualTo(12)
+                make.height.equalTo(12)
+            }
+
+            badgeLabel.snp.makeConstraints { (make) in
+                make.top.bottom.equalToSuperview().inset(2)
+                make.left.right.equalToSuperview().inset(3)
+            }
+        }
+
+        override func layoutSubviews() {
+            super.layoutSubviews()
+
+            layer.cornerRadius = bounds.height / 2
+            contentView.layer.cornerRadius = (bounds.height - 2) / 2
+        }
+
+    }
+
 }
