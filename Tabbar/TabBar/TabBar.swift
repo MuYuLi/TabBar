@@ -73,6 +73,10 @@ class TabBar: UITabBar {
             containers.append(container)
             
             container.addTarget(self, action: #selector(btnPressed), for: .touchUpInside)
+            
+            if selectedItem != nil && container.item === selectedItem {
+                container.setSelected(true)
+            }
         }
         setNeedsLayout()
     }
